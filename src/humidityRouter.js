@@ -3,8 +3,6 @@ const bodyParser = require('body-parser');
 const humidityRouter = express.Router();
 humidityRouter.use(bodyParser.json());
 
-
-const admin = require('firebase-admin');
 const firebase = require("firebase");
 var FieldValue = require("firebase-admin").firestore.FieldValue;
 var moment = require('moment');
