@@ -3,7 +3,6 @@ const bodyParser = require('body-parser');
 const tempRouter = express.Router();
 tempRouter.use(bodyParser.json());
 
-const admin = require('firebase-admin');
 const firebase = require("firebase");
 var database = firebase.database();
 var FieldValue = require("firebase-admin").firestore.FieldValue;
