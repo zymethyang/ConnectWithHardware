@@ -41,7 +41,7 @@ tempRouter.route('/')
                 console.error(user.uid + ' POST Temperature error at ' + moment(FieldValue.serverTimestamp()).format("YYYY-MM-DD hh:mm a"), error);
             });
         } else {
-            console.log(user.uid + 'Fail to POST TEMPORATURE AT ' + moment(FieldValue.serverTimestamp()).format("YYYY-MM-DD hh:mm a"));
+            console.log('Fail to POST TEMPORATURE AT ' + moment(FieldValue.serverTimestamp()).format("YYYY-MM-DD hh:mm a"));
             res.statusCode = 403;
             res.setHeader('Content-Type', 'application/json');
             res.json('Error');

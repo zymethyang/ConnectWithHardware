@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const userRouter = express.Router();
 userRouter.use(bodyParser.json());
 
-const admin = require('./firebase-admin');
+//const admin = require('./firebase-admin');
 const firebase = require('./firebase-admin');
 var network = require('network');
 
