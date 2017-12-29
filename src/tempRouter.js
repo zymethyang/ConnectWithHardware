@@ -4,12 +4,10 @@ const tempRouter = express.Router();
 tempRouter.use(bodyParser.json());
 
 const admin = require('firebase-admin');
-var db = admin.firestore();
 const firebase = require("firebase");
 var database = firebase.database();
 var FieldValue = require("firebase-admin").firestore.FieldValue;
 var moment = require('moment');
-var getIP = require('ipware')().get_ip;
 
 tempRouter.route('/')
     .all((req, res, next) => {
@@ -23,7 +21,7 @@ tempRouter.route('/')
         res.end('GET operation not supported on /temp');
     })
     .post((req, res, next) => {
-        var user = firebase.auth().currentUser;
+        var user = firebase.auth().currentUser || null ;
         if (user) {
             console.log(user.uid + ' POST Temperature at ' + moment(FieldValue.serverTimestamp()).format("YYYY-MM-DD hh:mm a"));
             database.ref("/temp").push({
