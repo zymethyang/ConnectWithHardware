@@ -21,7 +21,7 @@ tempRouter.route('/')
         res.end('GET operation not supported on /temp');
     })
     .post((req, res, next) => {
-        var user = firebase.auth().currentUser || null ;
+        var user = firebase.auth().currentUser || false ;
         if (user) {
             console.log(user.uid + ' POST Temperature at ' + moment(FieldValue.serverTimestamp()).format("YYYY-MM-DD hh:mm a"));
             database.ref("/temp").push({
