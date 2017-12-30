@@ -10,7 +10,7 @@ app.use(bodyParser.json());
 app.use(cors({credentials: true, origin: '*'}));
 
 const port = 80;
-const host = '184.73.182.38';
+const host = 'localhost';
 
 const router = require('./routes');
 const userRouter = require('./userRouter');
