@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors({credentials: true, origin: '*'}));
 
-const port = 80;
+const port = 3000;
 const host = 'localhost';
 
 const router = require('./routes');
