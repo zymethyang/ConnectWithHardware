@@ -3,7 +3,7 @@ const admin = require('./firebase-admin');
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
-var cors = require('cors')
+var cors = require('cors');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
