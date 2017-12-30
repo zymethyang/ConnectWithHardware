@@ -4,6 +4,7 @@ const humidityRouter = express.Router();
 humidityRouter.use(bodyParser.json());
 
 const firebase = require("firebase");
+var database = firebase.database();
 var FieldValue = require("firebase-admin").firestore.FieldValue;
 var moment = require('moment');
 
@@ -21,9 +22,12 @@ humidityRouter.route('/')
         var user = firebase.auth().currentUser || false;
         if (user) {
             console.log(user.uid + ' POST Humidity at ' + moment(FieldValue.serverTimestamp()).format("YYYY-MM-DD hh:mm a"));
+            const reducer = (accumulator, currentValue) => accumulator + currentValue;
+            var mean = Object.values(req.body).reduce(reducer) / (Object.values(req.body).length);
             database.ref("/humidity").push({
                 uid: user.uid,
                 temp: req.body,
+                mean:mean,
                 startedAt: moment(FieldValue.serverTimestamp()).unix(),
                 updatedAt: moment(FieldValue.serverTimestamp()).unix()
             }).then(docRef => {

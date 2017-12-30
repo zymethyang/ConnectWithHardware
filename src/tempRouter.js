@@ -20,12 +20,15 @@ tempRouter.route('/')
         res.end('GET operation not supported on /temp');
     })
     .post((req, res, next) => {
-        var user = firebase.auth().currentUser || false ;
+        var user = firebase.auth().currentUser || false;
         if (user) {
             console.log(user.uid + ' POST Temperature at ' + moment(FieldValue.serverTimestamp()).format("YYYY-MM-DD hh:mm a"));
+            const reducer = (accumulator, currentValue) => accumulator + currentValue;
+            var mean = Object.values(req.body).reduce(reducer) / (Object.values(req.body).length);
             database.ref("/temp").push({
                 uid: user.uid,
                 temp: req.body,
+                mean: mean,
                 startedAt: moment(FieldValue.serverTimestamp()).unix(),
                 updatedAt: moment(FieldValue.serverTimestamp()).unix()
             }).then(docRef => {
@@ -33,12 +36,12 @@ tempRouter.route('/')
                 res.setHeader('Content-Type', 'application/json');
                 res.json('Successful');
             })
-            .catch( error => {
-                res.statusCode = 403;
-                res.setHeader('Content-Type', 'application/json');
-                res.json('Error');
-                console.error(user.uid + ' POST Temperature error at ' + moment(FieldValue.serverTimestamp()).format("YYYY-MM-DD hh:mm a"), error);
-            });
+                .catch(error => {
+                    res.statusCode = 403;
+                    res.setHeader('Content-Type', 'application/json');
+                    res.json('Error');
+                    console.error(user.uid + ' POST Temperature error at ' + moment(FieldValue.serverTimestamp()).format("YYYY-MM-DD hh:mm a"), error);
+                });
         } else {
             console.log('Fail to POST TEMPORATURE AT ' + moment(FieldValue.serverTimestamp()).format("YYYY-MM-DD hh:mm a"));
             res.statusCode = 403;
