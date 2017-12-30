@@ -9,8 +9,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors({credentials: true, origin: '*'}));
 
-const port = 3000;
-const host = 'localhost';
+var port = process.env.PORT || 3000;
 
 const router = require('./routes');
 const userRouter = require('./userRouter');
@@ -24,6 +23,6 @@ app.use('/temp',tempRouter);
 app.use('/humidity',humidityRouter);
 app.use('/bump',bumpRouter);
 
-app.listen(port, host);
+app.listen(port);
 
-console.log(`Server listening at ${host}:${port}`);
+console.log(`Server listening at ${port}`);
