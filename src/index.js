@@ -9,8 +9,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors({credentials: true, origin: '*'}));
 
-const port = process.env.APP_PORT || 8080;
-const host = process.env.APP_HOST || '127.0.0.1';
+const port = 443;
+const host = 'https://vast-temple-42441.herokuapp.com/';
 
 const router = require('./routes');
 const userRouter = require('./userRouter');
